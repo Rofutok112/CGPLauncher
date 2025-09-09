@@ -52,16 +52,17 @@
     "markdown": ""
   },
   {
-    "name": "オケアノス-海底探索STG",
-    "version": "",
-    "authors": [""],
-    "tags": [""],
-    "url": "a",
-    "unityroomurl": "a",
-    "buildFile": "a",
-    "githuburl": "a",
+    "name": "Space Parrabox",
+    "version": "1.0",
+    "authors": ["三谷", "橋詰", "森田"],
+    "tags": ["#冬チーム_2024"],
+    "url": "",
+    "unityroomurl": "https://unityroom.com/games/parabox",
+    "buildFile": "",
+    "githuburl": "",
     "description": "",
-    "image": "Images/Okeanos.png",
+    "image": "https://images-ext-1.discordapp.net/external/bo9Dl70EbpU5lViVbLaknm7I6LKR-KXmOTy6bl_9Q7Q/%3Fh%3D1741886837/https/os-worker.unityroom.com/unityroom_production/icon/148512/icon_20250314_022717.png?format=webp&quality=lossless",
     "markdown": ""
   }
 ]
+
