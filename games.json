@@ -55,7 +55,7 @@
     "name": "Space Parrabox",
     "version": "1.0",
     "authors": ["三谷", "橋詰", "森田"],
-    "tags": ["#冬チーム_2024"],
+    "tags": ["#冬チーム_2024", "シューティング", "パズル"],
     "url": "",
     "unityroomurl": "https://unityroom.com/games/parabox",
     "buildFile": "",
@@ -65,4 +65,5 @@
     "markdown": ""
   }
 ]
+
 
