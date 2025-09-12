@@ -113,5 +113,36 @@
     "description": "社畜が会社を破壊するゲームです",
     "image": "https://gck-prod-uploads.s3.ap-northeast-1.amazonaws.com/thumbnails/9a927084-fa13-4606-9997-2f0aa0148218.png",
     "markdown": "game_descriptions/explosion.md"
+  },
+  {
+    "name": "リコシェシューティング",
+    "version": "1.0",
+    "authors": [],
+    "tags": [
+      "#冬チーム_2024",
+      "#シューティング"
+    ],
+    "url": "",
+    "buildFile": "",
+    "unityroomurl": "https://unityroom.com/games/ricochet_shooting",
+    "githuburl": "",
+    "description": "",
+    "image": "",
+    "markdown": ""
+  },
+  {
+    "name": "アモーレ！闘牛神",
+    "version": "1.0",
+    "authors": [],
+    "tags": [
+      "#冬チーム_2024"
+    ],
+    "url": "",
+    "buildFile": "",
+    "unityroomurl": "https://unityroom.com/games/amo_bull",
+    "githuburl": "",
+    "description": "",
+    "image": "",
+    "markdown": ""
   }
 ]

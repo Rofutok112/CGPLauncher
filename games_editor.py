@@ -10,6 +10,7 @@ import threading
 
 class GamesEditor:
     def __init__(self, root):
+        self.is_saved = True  # 変更保存フラグ
         self.root = root
         self.root.title("Games.json エディター")
         self.root.geometry("600x780")
@@ -24,6 +25,44 @@ class GamesEditor:
         # GUI要素の初期化
         self.setup_ui()
         self.load_games()
+        # 起動時に新規追加モードにする
+        self.add_new_game()
+        # 閉じるボタンのプロトコル設定
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+
+    def on_close(self):
+        if not self.is_saved:
+            if not messagebox.askyesno("警告", "保存されていない変更があります。終了してもよろしいですか？"):
+                return
+        self.root.destroy()
+
+    def mark_unsaved(self, *args):
+        self.is_saved = False
+
+    def show_status(self, message, status_type="info", auto_clear=True, duration=3000):
+        """ステータスバーにメッセージを表示
+        
+        Args:
+            message (str): 表示するメッセージ
+            status_type (str): メッセージの種類 ("info", "success", "warning", "error")
+            auto_clear (bool): 自動でクリアするかどうか
+            duration (int): 自動クリアまでの時間（ミリ秒）
+        """
+        color_map = {
+            "info": "blue",
+            "success": "green", 
+            "warning": "orange",
+            "error": "red"
+        }
+        
+        self.status_label.configure(text=message, foreground=color_map.get(status_type, "black"))
+        
+        if auto_clear:
+            self.root.after(duration, lambda: self.status_label.configure(text="準備完了", foreground="green"))
+        
+    def clear_status(self):
+        """ステータスバーをクリア"""
+        self.status_label.configure(text="準備完了", foreground="green")
         
     def setup_ui(self):
         # メインフレーム
@@ -73,6 +112,14 @@ class GamesEditor:
         # 編集フィールド
         self.create_edit_fields(edit_frame)
         
+        # ステータスバーフレーム
+        status_frame = ttk.Frame(self.root)
+        status_frame.grid(row=1, column=0, sticky=(tk.W, tk.E), padx=10, pady=(0, 5))
+        
+        # ステータスラベル
+        self.status_label = ttk.Label(status_frame, text="準備完了", foreground="green")
+        self.status_label.pack(side=tk.LEFT)
+        
         # グリッド設定
         main_frame.columnconfigure(0, weight=1)
         main_frame.rowconfigure(2, weight=1)
@@ -82,6 +129,7 @@ class GamesEditor:
         
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
+        status_frame.columnconfigure(0, weight=1)
         
     def create_edit_fields(self, parent):
         """編集フィールドを作成"""
@@ -122,6 +170,7 @@ class GamesEditor:
         for field, label in basic_fields:
             ttk.Label(parent, text=label + ":").grid(row=row, column=0, sticky=tk.W, padx=(0, 5), pady=2)
             var = tk.StringVar()
+            var.trace('w', self.mark_unsaved)  # 変更検知を追加
             entry = ttk.Entry(parent, textvariable=var, width=50)
             entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
             self.entry_vars[field] = var
@@ -136,6 +185,7 @@ class GamesEditor:
         for field, label in download_fields:
             ttk.Label(parent, text=label + ":").grid(row=row, column=0, sticky=tk.W, padx=(0, 5), pady=2)
             var = tk.StringVar()
+            var.trace('w', self.mark_unsaved)  # 変更検知を追加
             entry = ttk.Entry(parent, textvariable=var, width=50)
             entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
             self.entry_vars[field] = var
@@ -150,6 +200,7 @@ class GamesEditor:
         for field, label in url_fields:
             ttk.Label(parent, text=label + ":").grid(row=row, column=0, sticky=tk.W, padx=(0, 5), pady=2)
             var = tk.StringVar()
+            var.trace('w', self.mark_unsaved)  # 変更検知を追加
             entry = ttk.Entry(parent, textvariable=var, width=50)
             entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
             self.entry_vars[field] = var
@@ -168,10 +219,14 @@ class GamesEditor:
                 # 複数行テキスト
                 text_widget = tk.Text(parent, height=3, width=50)
                 text_widget.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
+                # Text ウィジェットの変更検知を追加
+                text_widget.bind('<KeyRelease>', self.mark_unsaved)
+                text_widget.bind('<Button-1>', self.mark_unsaved)  # マウスでの変更も検知
                 self.entry_vars[field] = text_widget
             else:
                 # 単一行テキスト
                 var = tk.StringVar()
+                var.trace('w', self.mark_unsaved)  # 変更検知を追加
                 entry = ttk.Entry(parent, textvariable=var, width=50)
                 entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
                 self.entry_vars[field] = var
@@ -202,10 +257,11 @@ class GamesEditor:
             self.filtered_games = self.games_data.copy()  # 初期状態では全ゲームを表示
             self.refresh_game_list()
             self.clear_edit_fields()
-            messagebox.showinfo("成功", "ゲームデータを読み込みました")
+            self.is_saved = True  # データ読み込み後にフラグをリセット
+            self.show_status("ゲームデータを読み込みました", "success")
             
         except Exception as e:
-            messagebox.showerror("エラー", f"ファイルの読み込みに失敗しました: {str(e)}")
+            self.show_status(f"ファイルの読み込みに失敗しました: {str(e)}", "error", auto_clear=False)
             
     def refresh_game_list(self):
         """ゲームリストを更新"""
@@ -273,7 +329,7 @@ class GamesEditor:
         """ゲームデータのバリデーション"""
         # ゲーム名必須チェック
         if not game_data.get("name"):
-            messagebox.showwarning("警告", "ゲーム名を入力してください")
+            self.show_status("ゲーム名を入力してください", "warning", auto_clear=False)
             return False
             
         # URL必須チェック（GitHubURL、UnityRoomURL、ダウンロードURLのいずれか1つ以上）
@@ -281,7 +337,7 @@ class GamesEditor:
         has_url = any(game_data.get(field, "").strip() for field in url_fields)
         
         if not has_url:
-            messagebox.showwarning("警告", "GitHubURL、UnityRoomURL、ダウンロードURLのいずれか1つ以上を入力してください")
+            self.show_status("GitHubURL、UnityRoomURL、ダウンロードURLのいずれか1つ以上を入力してください", "warning", auto_clear=False)
             return False
             
         # ダウンロードURLと実行ファイル名のセットチェック
@@ -289,11 +345,11 @@ class GamesEditor:
         build_file = game_data.get("buildFile", "").strip()
         
         if download_url and not build_file:
-            messagebox.showwarning("警告", "ダウンロードURLを入力した場合は、実行ファイル名も入力してください")
+            self.show_status("ダウンロードURLを入力した場合は、実行ファイル名も入力してください", "warning", auto_clear=False)
             return False
             
         if build_file and not download_url:
-            messagebox.showwarning("警告", "実行ファイル名を入力した場合は、ダウンロードURLも入力してください")
+            self.show_status("実行ファイル名を入力した場合は、ダウンロードURLも入力してください", "warning", auto_clear=False)
             return False
             
         return True
@@ -331,7 +387,7 @@ class GamesEditor:
                                     if isinstance(button, ttk.Button) and "更新" in str(button.cget("text")):
                                         button.configure(state="disabled")
         
-        messagebox.showinfo("新規ゲーム追加", "新しいゲームの情報を入力してください")
+        self.show_status("新しいゲームの情報を入力してください", "info")
         
     def save_new_game(self):
         """新しいゲームを保存"""
@@ -356,7 +412,10 @@ class GamesEditor:
                     if not messagebox.askyesno("URL検証結果", result_message):
                         return
                 else:
-                    messagebox.showinfo("URL検証結果", result_message)
+                    # URL検証結果の成功部分のみステータスバーに表示
+                    success_count = url_check_result['valid_count']
+                    total_count = url_check_result['total_count']
+                    self.show_status(f"URL検証完了: {success_count}/{total_count} 個のURLが有効", "success")
             
         self.games_data.append(game_data)
         
@@ -376,12 +435,14 @@ class GamesEditor:
         # 新規追加モードを終了
         self.exit_new_game_mode()
         
-        messagebox.showinfo("成功", "新しいゲームを追加しました")
+        self.is_saved = True  # 新しいゲーム追加後にフラグをリセット
+        self.show_status("新しいゲームを追加しました", "success")
         
     def cancel_new_game(self):
         """新規ゲーム追加をキャンセル"""
         self.clear_edit_fields()
         self.exit_new_game_mode()
+        self.is_saved = True  # キャンセル時にフラグをリセット
         
     def exit_new_game_mode(self):
         """新規追加モードを終了"""
@@ -413,7 +474,7 @@ class GamesEditor:
         """選択したゲームを削除"""
         selection = self.game_listbox.curselection()
         if not selection:
-            messagebox.showwarning("警告", "削除するゲームを選択してください")
+            self.show_status("削除するゲームを選択してください", "warning")
             return
             
         index = selection[0]
@@ -431,18 +492,19 @@ class GamesEditor:
             # フィルターリストも更新
             self.on_search_change()
             self.clear_edit_fields()
-            messagebox.showinfo("成功", "ゲームを削除しました")
+            self.is_saved = True  # ゲーム削除後にフラグをリセット
+            self.show_status("ゲームを削除しました", "success")
             
     def update_current_game(self):
         """現在選択中のゲームを更新"""
         # 新規追加モードの場合は何もしない
         if self.is_new_game_mode:
-            messagebox.showwarning("警告", "新規追加モードです。「新しいゲームを保存」ボタンを使用してください")
+            self.show_status("新規追加モードです。「新しいゲームを保存」ボタンを使用してください", "warning")
             return
             
         selection = self.game_listbox.curselection()
         if not selection:
-            messagebox.showwarning("警告", "更新するゲームを選択してください")
+            self.show_status("更新するゲームを選択してください", "warning")
             return
             
         index = selection[0]
@@ -469,7 +531,8 @@ class GamesEditor:
         except ValueError:
             pass
             
-        messagebox.showinfo("成功", "ゲーム情報を更新しました")
+        self.is_saved = True  # ゲーム更新後にフラグをリセット
+        self.show_status("ゲーム情報を更新しました", "success")
         
     def save_games(self):
         """現在の編集内容を反映してからJSONファイルに保存"""
@@ -491,15 +554,19 @@ class GamesEditor:
             
             with open(self.json_file, 'w', encoding='utf-8') as f:
                 json.dump(self.games_data, f, ensure_ascii=False, indent=2)
-            messagebox.showinfo("成功", "games.jsonを保存しました")
+            self.is_saved = True  # 保存完了後にフラグをリセット
+            self.show_status("games.jsonを保存しました", "success")
         except Exception as e:
-            messagebox.showerror("エラー", f"保存に失敗しました: {str(e)}")
+            self.show_status(f"保存に失敗しました: {str(e)}", "error", auto_clear=False)
             
     def create_backup(self):
         """バックアップファイルを作成"""
         if os.path.exists(self.json_file):
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            backup_name = f"games_backup_{timestamp}.json"
+            backup_dir = "backup"
+            if not os.path.exists(backup_dir):
+                os.makedirs(backup_dir)
+            backup_name = os.path.join(backup_dir, f"games_backup_{timestamp}.json")
             shutil.copy2(self.json_file, backup_name)
             
     def on_search_change(self, *args):
