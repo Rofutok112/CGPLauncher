@@ -3,19 +3,19 @@
     "name": "Pocket Gardening",
     "version": "Beta",
     "authors": [
-      "Garden Studios",
-      "植物愛好会"
+      "橋詰",
+      "田尻",
+      "吉岡"
     ],
     "tags": [
-      "#シミュレーション",
-      "#癒し",
-      "#ガーデニング"
+      "#ガーデニング",
+      "#パズル"
     ],
     "url": "https://github.com/Rofutok112/PocketGardening/releases/download/Test/PocketGardening.zip",
     "buildFile": "PocketGardening.exe",
     "unityroomurl": "",
     "githuburl": "https://github.com/Rofutok112/PocketGardening",
-    "description": "シンプルな音ゲー",
+    "description": "パズル✕ガーデニングゲーム",
     "image": "https://i.imgur.com/lH2rKpk.jpeg",
     "markdown": "https://raw.githubusercontent.com/Rofutok112/PocketGardening/refs/heads/main/README.md"
   },
