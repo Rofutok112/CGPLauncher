@@ -77,6 +77,19 @@
     "markdown": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/refs/heads/main/README.md"
   },
   {
+    "name": "Test",
+    "version": "",
+    "authors": [],
+    "tags": [],
+    "url": "test",
+    "buildFile": "test",
+    "unityroomurl": "test",
+    "githuburl": "test",
+    "description": "",
+    "image": "",
+    "markdown": ""
+  },
+  {
     "name": "おとして！串だんご",
     "version": "1.0",
     "authors": [],
