@@ -134,19 +134,18 @@
   },
   {
     "name": "オケアノス-海底探索STG-",
-    "version": "",
-    "authors": [
-      ""
-    ],
+    "version": "1.0",
+    "authors": [],
     "tags": [
-      ""
+      "#夏チーム_2023",
+      "#ストラテジー"
     ],
     "url": "",
+    "buildFile": "",
     "unityroomurl": "https://unityroom.com/games/teamg_aequor#google_vignette",
     "githuburl": "",
-    "buildFile": "",
     "description": "",
-    "image": "Images/Okeanos.png",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/53036/icon_20230930_212540.png?h=1696076740",
     "markdown": ""
   },
   {
