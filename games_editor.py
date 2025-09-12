@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox, filedialog
 import json
 import os
 import shutil
+import subprocess
 from datetime import datetime
 import urllib.request
 import urllib.error
@@ -10,10 +11,9 @@ import threading
 
 class GamesEditor:
     def __init__(self, root):
-        self.is_saved = True  # 変更保存フラグ
         self.root = root
         self.root.title("Games.json エディター")
-        self.root.geometry("600x780")
+        self.root.geometry("600x850")
         self.root.resizable(False, False)  # 画面サイズ固定
         
         # JSONファイルのパス
@@ -21,6 +21,14 @@ class GamesEditor:
         self.games_data = []
         self.filtered_games = []  # 検索結果用
         self.is_new_game_mode = False  # 新規追加モードフラグ
+        
+        # 選択中のゲーム情報を追跡
+        self.selected_game = None
+        self.selected_game_index = None
+        
+        # Git自動コミット設定
+        self.auto_commit_enabled = tk.BooleanVar(value=True)  # デフォルトで有効
+        self.auto_push_enabled = tk.BooleanVar(value=False)   # デフォルトで無効（プッシュは慎重に）
         
         # GUI要素の初期化
         self.setup_ui()
@@ -30,14 +38,28 @@ class GamesEditor:
         # 閉じるボタンのプロトコル設定
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
+    def has_unsaved_changes(self):
+        """メモリ上のデータとJSONファイルを比較して未保存の変更があるかチェック"""
+        try:
+            if not os.path.exists(self.json_file):
+                # ファイルが存在しない場合、メモリにデータがあれば未保存
+                return len(self.games_data) > 0
+            
+            with open(self.json_file, 'r', encoding='utf-8') as f:
+                file_data = json.load(f)
+            
+            # メモリ上のデータとファイルのデータを比較
+            return self.games_data != file_data
+            
+        except Exception:
+            # ファイル読み込みエラーの場合は安全側に倒して未保存とみなす
+            return True
+
     def on_close(self):
-        if not self.is_saved:
+        if self.has_unsaved_changes():
             if not messagebox.askyesno("警告", "保存されていない変更があります。終了してもよろしいですか？"):
                 return
         self.root.destroy()
-
-    def mark_unsaved(self, *args):
-        self.is_saved = False
 
     def show_status(self, message, status_type="info", auto_clear=True, duration=3000):
         """ステータスバーにメッセージを表示
@@ -63,6 +85,75 @@ class GamesEditor:
     def clear_status(self):
         """ステータスバーをクリア"""
         self.status_label.configure(text="準備完了", foreground="green")
+
+    def run_git_command(self, command, show_output=True):
+        """Gitコマンドを実行"""
+        try:
+            result = subprocess.run(
+                command, 
+                shell=True, 
+                capture_output=True, 
+                text=True, 
+                cwd=os.path.dirname(os.path.abspath(__file__))
+            )
+            
+            if result.returncode == 0:
+                if show_output and result.stdout.strip():
+                    self.show_status(f"Git: {result.stdout.strip()}", "success")
+                return True, result.stdout.strip()
+            else:
+                error_msg = result.stderr.strip() or "Gitコマンドが失敗しました"
+                self.show_status(f"Git エラー: {error_msg}", "error", auto_clear=False)
+                return False, error_msg
+                
+        except Exception as e:
+            self.show_status(f"Git コマンド実行エラー: {str(e)}", "error", auto_clear=False)
+            return False, str(e)
+
+    def git_commit_and_push(self, commit_message):
+        """Gitにコミットし、オプションでプッシュ"""
+        if not self.auto_commit_enabled.get():
+            return True
+            
+        self.show_status("Gitコミット中...", "info", auto_clear=False)
+        
+        # ステージング
+        success, _ = self.run_git_command("git add games.json", show_output=False)
+        if not success:
+            return False
+            
+        # 変更があるかチェック
+        success, output = self.run_git_command("git diff --staged --name-only", show_output=False)
+        if not success:
+            return False
+            
+        if not output.strip():
+            self.show_status("コミットする変更がありません", "info")
+            return True
+            
+        # コミット
+        commit_cmd = f'git commit -m "{commit_message}"'
+        success, _ = self.run_git_command(commit_cmd, show_output=False)
+        if not success:
+            return False
+            
+        self.show_status("コミット完了", "success")
+        
+        # プッシュ（有効な場合）
+        if self.auto_push_enabled.get():
+            self.show_status("GitHubにプッシュ中...", "info", auto_clear=False)
+            success, _ = self.run_git_command("git push origin main", show_output=False)
+            if success:
+                self.show_status("プッシュ完了", "success")
+            else:
+                return False
+                
+        return True
+
+    def generate_commit_message(self):
+        """コミットメッセージを自動生成"""
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        return f"Update games.json ({timestamp})"
         
     def setup_ui(self):
         # メインフレーム
@@ -105,12 +196,19 @@ class GamesEditor:
         ttk.Button(button_frame, text="保存", command=self.save_games).pack(side=tk.LEFT, padx=(0, 5))
         ttk.Button(button_frame, text="再読み込み", command=self.load_games).pack(side=tk.LEFT)
         
+        # Git設定フレーム
+        git_frame = ttk.LabelFrame(main_frame, text="Git設定", padding="5")
+        git_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(10, 5))
+        
+        ttk.Checkbutton(git_frame, text="保存時に自動コミット", variable=self.auto_commit_enabled).pack(side=tk.LEFT, padx=(0, 10))
+        ttk.Checkbutton(git_frame, text="コミット後に自動プッシュ", variable=self.auto_push_enabled).pack(side=tk.LEFT)
+        
         # 編集フレーム
-        edit_frame = ttk.LabelFrame(main_frame, text="ゲーム編集", padding="5")
-        edit_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S))
+        self.edit_frame = ttk.LabelFrame(main_frame, text="ゲーム編集", padding="5")
+        self.edit_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         # 編集フィールド
-        self.create_edit_fields(edit_frame)
+        self.create_edit_fields(self.edit_frame)
         
         # ステータスバーフレーム
         status_frame = ttk.Frame(self.root)
@@ -122,10 +220,10 @@ class GamesEditor:
         
         # グリッド設定
         main_frame.columnconfigure(0, weight=1)
-        main_frame.rowconfigure(2, weight=1)
+        main_frame.rowconfigure(3, weight=1)  # 編集フレームが3行目に移動
         list_frame.columnconfigure(0, weight=1)
         list_frame.rowconfigure(0, weight=1)
-        edit_frame.columnconfigure(1, weight=1)
+        self.edit_frame.columnconfigure(1, weight=1)
         
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
@@ -170,7 +268,6 @@ class GamesEditor:
         for field, label in basic_fields:
             ttk.Label(parent, text=label + ":").grid(row=row, column=0, sticky=tk.W, padx=(0, 5), pady=2)
             var = tk.StringVar()
-            var.trace('w', self.mark_unsaved)  # 変更検知を追加
             entry = ttk.Entry(parent, textvariable=var, width=50)
             entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
             self.entry_vars[field] = var
@@ -185,7 +282,6 @@ class GamesEditor:
         for field, label in download_fields:
             ttk.Label(parent, text=label + ":").grid(row=row, column=0, sticky=tk.W, padx=(0, 5), pady=2)
             var = tk.StringVar()
-            var.trace('w', self.mark_unsaved)  # 変更検知を追加
             entry = ttk.Entry(parent, textvariable=var, width=50)
             entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
             self.entry_vars[field] = var
@@ -200,7 +296,6 @@ class GamesEditor:
         for field, label in url_fields:
             ttk.Label(parent, text=label + ":").grid(row=row, column=0, sticky=tk.W, padx=(0, 5), pady=2)
             var = tk.StringVar()
-            var.trace('w', self.mark_unsaved)  # 変更検知を追加
             entry = ttk.Entry(parent, textvariable=var, width=50)
             entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
             self.entry_vars[field] = var
@@ -219,14 +314,10 @@ class GamesEditor:
                 # 複数行テキスト
                 text_widget = tk.Text(parent, height=3, width=50)
                 text_widget.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
-                # Text ウィジェットの変更検知を追加
-                text_widget.bind('<KeyRelease>', self.mark_unsaved)
-                text_widget.bind('<Button-1>', self.mark_unsaved)  # マウスでの変更も検知
                 self.entry_vars[field] = text_widget
             else:
                 # 単一行テキスト
                 var = tk.StringVar()
-                var.trace('w', self.mark_unsaved)  # 変更検知を追加
                 entry = ttk.Entry(parent, textvariable=var, width=50)
                 entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
                 self.entry_vars[field] = var
@@ -257,7 +348,6 @@ class GamesEditor:
             self.filtered_games = self.games_data.copy()  # 初期状態では全ゲームを表示
             self.refresh_game_list()
             self.clear_edit_fields()
-            self.is_saved = True  # データ読み込み後にフラグをリセット
             self.show_status("ゲームデータを読み込みました", "success")
             
         except Exception as e:
@@ -280,10 +370,25 @@ class GamesEditor:
             index = selection[0]
             if index < len(self.filtered_games):
                 game = self.filtered_games[index]
+                # 選択されたゲーム情報を保存
+                self.selected_game = game
+                self.selected_game_index = self.get_actual_index(index)
                 self.load_game_to_fields(game)
             
+    def update_edit_frame_title(self, game_name=None):
+        """編集フレームのタイトルを更新"""
+        if game_name:
+            title = f"ゲーム編集 - {game_name}"
+        else:
+            title = "ゲーム編集"
+        self.edit_frame.configure(text=title)
+
     def load_game_to_fields(self, game):
         """選択したゲームの情報を編集フィールドに読み込む"""
+        # 編集フレームのタイトルを更新
+        game_name = game.get("name", "名前なし")
+        self.update_edit_frame_title(game_name)
+        
         for field, widget in self.entry_vars.items():
             value = game.get(field, "")
             
@@ -362,15 +467,15 @@ class GamesEditor:
         # 選択をクリア
         self.game_listbox.selection_clear(0, tk.END)
         
+        # 選択情報をクリア
+        self.selected_game = None
+        self.selected_game_index = None
+        
         # 新規追加モードに設定
         self.is_new_game_mode = True
         
         # 編集フレームのタイトルを変更
-        for child in self.root.winfo_children():
-            if isinstance(child, ttk.Frame):
-                for grandchild in child.winfo_children():
-                    if isinstance(grandchild, ttk.LabelFrame) and "ゲーム編集" in str(grandchild.cget("text")):
-                        grandchild.configure(text="新規ゲーム追加")
+        self.edit_frame.configure(text="新規ゲーム追加")
         
         # 新規追加用ボタンを有効化
         self.save_new_button.configure(state="normal")
@@ -435,25 +540,20 @@ class GamesEditor:
         # 新規追加モードを終了
         self.exit_new_game_mode()
         
-        self.is_saved = True  # 新しいゲーム追加後にフラグをリセット
+        game_name = game_data.get("name", "Unknown Game")
         self.show_status("新しいゲームを追加しました", "success")
         
     def cancel_new_game(self):
         """新規ゲーム追加をキャンセル"""
         self.clear_edit_fields()
         self.exit_new_game_mode()
-        self.is_saved = True  # キャンセル時にフラグをリセット
         
     def exit_new_game_mode(self):
         """新規追加モードを終了"""
         self.is_new_game_mode = False
         
         # 編集フレームのタイトルを元に戻す
-        for child in self.root.winfo_children():
-            if isinstance(child, ttk.Frame):
-                for grandchild in child.winfo_children():
-                    if isinstance(grandchild, ttk.LabelFrame) and "新規ゲーム追加" in str(grandchild.cget("text")):
-                        grandchild.configure(text="ゲーム編集")
+        self.update_edit_frame_title()
         
         # 新規追加用ボタンを無効化
         self.save_new_button.configure(state="disabled")
@@ -492,7 +592,12 @@ class GamesEditor:
             # フィルターリストも更新
             self.on_search_change()
             self.clear_edit_fields()
-            self.is_saved = True  # ゲーム削除後にフラグをリセット
+            
+            # 選択情報をクリア
+            self.selected_game = None
+            self.selected_game_index = None
+            self.update_edit_frame_title()
+            
             self.show_status("ゲームを削除しました", "success")
             
     def update_current_game(self):
@@ -502,13 +607,9 @@ class GamesEditor:
             self.show_status("新規追加モードです。「新しいゲームを保存」ボタンを使用してください", "warning")
             return
             
-        selection = self.game_listbox.curselection()
-        if not selection:
+        # 保存されたゲーム情報を使用
+        if not self.selected_game or self.selected_game_index is None:
             self.show_status("更新するゲームを選択してください", "warning")
-            return
-            
-        index = selection[0]
-        if index >= len(self.filtered_games):
             return
             
         game_data = self.get_current_game_data()
@@ -517,22 +618,25 @@ class GamesEditor:
         if not self.validate_game_data(game_data):
             return
             
-        # 元のリストでの実際のインデックスを取得
-        actual_index = self.get_actual_index(index)
-        self.games_data[actual_index] = game_data
-        
-        # フィルターリストも更新
-        self.on_search_change()
-        
-        # 更新したゲームを再選択（可能であれば）
-        try:
-            new_index = self.filtered_games.index(game_data)
-            self.game_listbox.selection_set(new_index)
-        except ValueError:
-            pass
+        # 保存されたインデックスを使用してゲームデータを更新
+        if self.selected_game_index < len(self.games_data):
+            self.games_data[self.selected_game_index] = game_data
             
-        self.is_saved = True  # ゲーム更新後にフラグをリセット
-        self.show_status("ゲーム情報を更新しました", "success")
+            # 選択されたゲーム情報も更新
+            self.selected_game = game_data
+            
+            # フィルターリストも更新
+            self.on_search_change()
+            
+            # 更新したゲームを再選択（可能であれば）
+            try:
+                new_index = self.filtered_games.index(game_data)
+                self.game_listbox.selection_set(new_index)
+            except ValueError:
+                pass
+                
+            game_name = game_data.get("name", "Unknown Game")
+            self.show_status("ゲーム情報を更新しました", "success")
         
     def save_games(self):
         """現在の編集内容を反映してからJSONファイルに保存"""
@@ -554,8 +658,12 @@ class GamesEditor:
             
             with open(self.json_file, 'w', encoding='utf-8') as f:
                 json.dump(self.games_data, f, ensure_ascii=False, indent=2)
-            self.is_saved = True  # 保存完了後にフラグをリセット
             self.show_status("games.jsonを保存しました", "success")
+            
+            # Gitコミット
+            commit_message = self.generate_commit_message()
+            self.git_commit_and_push(commit_message)
+            
         except Exception as e:
             self.show_status(f"保存に失敗しました: {str(e)}", "error", auto_clear=False)
             
