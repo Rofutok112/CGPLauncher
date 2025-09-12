@@ -79,6 +79,19 @@
     "markdown": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/refs/heads/main/README.md"
   },
   {
+    "name": "おとして！串だんご",
+    "version": "1.0",
+    "authors": [],
+    "tags": [],
+    "url": "",
+    "buildFile": "",
+    "unityroomurl": "https://unityroom.com/games/otoshite_kushidango",
+    "githuburl": "",
+    "description": "かんたん操作でサクッと遊べるピンボール風アクションです。\nだんごを生成するうさぎを操作し、ライフを減少させる毒だんごを上手にゴミ箱に捨てながら、きれいな三色の串だんごをたくさん作りましょう。",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/53743/icon_20230917_032245.png?h=1694888565",
+    "markdown": ""
+  },
+  {
     "name": "くるくるナイン",
     "version": "",
     "authors": [],
@@ -89,6 +102,21 @@
     "githuburl": "",
     "description": "",
     "image": "",
+    "markdown": ""
+  },
+  {
+    "name": "ときめき☆ネイルーム",
+    "version": "1.0",
+    "authors": [],
+    "tags": [
+      "#夏チーム_2023"
+    ],
+    "url": "",
+    "buildFile": "",
+    "unityroomurl": "https://unityroom.com/games/tokimekinailroom",
+    "githuburl": "",
+    "description": "",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/54977/icon_20230928_003408.png?h=1695828848",
     "markdown": ""
   },
   {
@@ -141,6 +169,24 @@
     "markdown": ""
   },
   {
+    "name": "モスキートサバイバー",
+    "version": "1.0",
+    "authors": [
+      "奥山"
+    ],
+    "tags": [
+      "#夏チーム_2024",
+      "#ローグライト"
+    ],
+    "url": "",
+    "buildFile": "",
+    "unityroomurl": "https://unityroom.com/games/mosquitosurvivor",
+    "githuburl": "",
+    "description": "ヴァンサバライクを作っていたと思ったら、\n制作中にプレイしていたRisk of Rain に影響を受けてしまった。",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/54977/icon_20230928_003408.png?h=1695828848",
+    "markdown": ""
+  },
+  {
     "name": "リコシェシューティング",
     "version": "1.0",
     "authors": [],
@@ -154,6 +200,36 @@
     "githuburl": "",
     "description": "",
     "image": "",
+    "markdown": ""
+  },
+  {
+    "name": "妖精の夏と冬",
+    "version": "1.0",
+    "authors": [],
+    "tags": [
+      "#2Dアクション"
+    ],
+    "url": "",
+    "buildFile": "",
+    "unityroomurl": "https://unityroom.com/games/cgphackb_yousei",
+    "githuburl": "",
+    "description": "妖精の力を借りて妹を助けよう！\nステージの季節を切り替えて進む２Dアクションゲーム",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/42746/icon_20230315_043446.PNG?h=1678822486",
+    "markdown": ""
+  },
+  {
+    "name": "競え！初夏の夢祭り",
+    "version": "1.0",
+    "authors": [],
+    "tags": [
+      "#夏チーム_2023"
+    ],
+    "url": "",
+    "buildFile": "",
+    "unityroomurl": "https://unityroom.com/games/midsummer-festa",
+    "githuburl": "",
+    "description": "夏祭りの喜びを感じながら、3つのミニゲームで競い合う「競え！初夏の夢祭り」。金魚すくい、射的、ポテトフライキャッチで高得点を目指し、夏の雰囲気を楽しもう！",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/55713/icon_20231003_202139.png?h=1696332099",
     "markdown": ""
   },
   {
