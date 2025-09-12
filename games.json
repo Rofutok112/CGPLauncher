@@ -79,8 +79,24 @@
   {
     "name": "Test",
     "version": "",
-    "authors": [],
-    "tags": [],
+    "authors": [
+      "aa",
+      "aa",
+      "aa",
+      "aa",
+      "aa",
+      "aa",
+      "aa"
+    ],
+    "tags": [
+      "aa",
+      "aa",
+      "aa",
+      "aa",
+      "aa",
+      "aa",
+      "aa"
+    ],
     "url": "test",
     "buildFile": "test",
     "unityroomurl": "test",
