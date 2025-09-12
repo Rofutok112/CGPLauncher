@@ -23,7 +23,7 @@
     "name": "Runpage",
     "version": "1.0",
     "authors": [
-      "#藤惺"
+      "藤"
     ],
     "tags": [
       "#夏チーム_2024",
@@ -61,20 +61,18 @@
   {
     "name": "Space Sound",
     "version": "Beta",
-    "authors": [
-      "Sound Team",
-      "音楽制作チーム"
-    ],
+    "authors": [],
     "tags": [
+      "#冬チーム_2023",
       "#音ゲー",
       "#リズム",
       "#音楽"
     ],
-    "url": "",
+    "url": "https://github.com/twogod23/team_c_cgp_gamejam_2023/releases/download/vReleaseTest/SpaceSound.zip",
+    "buildFile": "Space_Sound.exe",
     "unityroomurl": "https://github.com/twogod23/team_c_cgp_gamejam_2023",
     "githuburl": "https://github.com/twogod23/team_c_cgp_gamejam_2023",
-    "buildFile": "",
-    "description": "シンプルな音ゲー",
+    "description": "シンプルなノーツが降ってくるタイプの音楽ゲーム",
     "image": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/main/Assets/Futagami/Images/title_logo.png",
     "markdown": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/refs/heads/main/README.md"
   },
