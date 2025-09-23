@@ -1,249 +1,65 @@
 [
   {
-    "name": "Pocket Gardening",
-    "version": "Beta",
-    "authors": [
-      "橋詰",
-      "田尻",
-      "吉岡"
-    ],
-    "tags": [
-      "#ガーデニング",
-      "#パズル"
-    ],
-    "url": "https://github.com/Rofutok112/PocketGardening/releases/download/Test/PocketGardening.zip",
-    "buildFile": "PocketGardening.exe",
-    "unityroomurl": "",
-    "githuburl": "https://github.com/Rofutok112/PocketGardening",
-    "description": "パズル✕ガーデニングゲーム",
-    "image": "https://raw.githubusercontent.com/Rofutok112/PocketGardening/main/wallpaper.png",
-    "markdown": "https://raw.githubusercontent.com/Rofutok112/PocketGardening/refs/heads/main/README.md"
-  },
-  {
-    "name": "Runpage",
-    "version": "1.0",
-    "authors": [
-      "藤"
-    ],
-    "tags": [
-      "#夏チーム_2024",
-      "#シューティング"
-    ],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/runpage24-d",
-    "githuburl": "",
-    "description": "シンプルな横スクロールシューティングゲームです。",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/116130/icon_20241103_102439.jpg?h=1730597079",
-    "markdown": ""
-  },
-  {
-    "name": "Space Parrabox",
-    "version": "1.0",
-    "authors": [
-      "三谷",
-      "橋詰",
-      "森田"
-    ],
-    "tags": [
-      "#冬チーム_2024",
-      "シューティング",
-      "パズル"
-    ],
-    "url": "",
-    "unityroomurl": "https://unityroom.com/games/parabox",
-    "buildFile": "",
-    "githuburl": "",
-    "description": "",
-    "image": "https://images-ext-1.discordapp.net/external/bo9Dl70EbpU5lViVbLaknm7I6LKR-KXmOTy6bl_9Q7Q/%3Fh%3D1741886837/https/os-worker.unityroom.com/unityroom_production/icon/148512/icon_20250314_022717.png?format=webp&quality=lossless",
-    "markdown": ""
-  },
-  {
     "name": "Space Sound",
-    "version": "Beta",
-    "authors": [],
-    "tags": [
-      "#冬チーム_2023",
-      "#音ゲー",
-      "#リズム",
-      "#音楽"
-    ],
-    "url": "https://github.com/twogod23/team_c_cgp_gamejam_2023/releases/download/vReleaseTest/SpaceSound.zip",
-    "buildFile": "Space_Sound.exe",
     "unityroomurl": "",
     "githuburl": "https://github.com/twogod23/team_c_cgp_gamejam_2023",
-    "description": "シンプルなノーツが降ってくるタイプの音楽ゲーム",
-    "image": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/main/Assets/Futagami/Images/title_logo.png",
-    "markdown": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/refs/heads/main/README.md"
+    "description": "シンプルな音ゲー",
+    "image": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/main/Assets/Futagami/Images/title_logo.png"
   },
   {
-    "name": "おとして！串だんご",
-    "version": "1.0",
-    "authors": [],
-    "tags": [],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/otoshite_kushidango",
-    "githuburl": "",
-    "description": "かんたん操作でサクッと遊べるピンボール風アクションです。\nだんごを生成するうさぎを操作し、ライフを減少させる毒だんごを上手にゴミ箱に捨てながら、きれいな三色の串だんごをたくさん作りましょう。",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/53743/icon_20230917_032245.png?h=1694888565",
-    "markdown": ""
-  },
-  {
-    "name": "くるくるナイン",
-    "version": "",
-    "authors": [],
-    "tags": [],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/flip9",
-    "githuburl": "",
-    "description": "",
-    "image": "",
-    "markdown": ""
-  },
-  {
-    "name": "ときめき☆ネイルーム",
-    "version": "1.0",
-    "authors": [],
-    "tags": [
-      "#夏チーム_2023"
-    ],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/tokimekinailroom",
-    "githuburl": "",
-    "description": "部屋から見つけたネイルグッズで爪をデコレーションするゲームです",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/54977/icon_20230928_003408.png?h=1695828848",
-    "markdown": ""
-  },
-  {
-    "name": "アモーレ！闘牛神",
-    "version": "1.0",
-    "authors": [],
-    "tags": [
-      "#冬チーム_2024"
-    ],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/amo_bull",
-    "githuburl": "",
-    "description": "舞台はとある闘牛場。\n...そこはただの闘牛場ではない。",
-    "image": "https://i.ytimg.com/vi/RO31DiESUPY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAO_uShqqQl6ggXJDY6zaZWOJsRjg",
-    "markdown": ""
+    "name": "Pocket Gardening",
+    "unityroomurl": "",
+    "githuburl": "https://github.com/Rofutok112/PocketGardening",
+    "description": "植物を育てるシミュレーションゲーム",
+    "image": "https://i.imgur.com/lH2rKpk.jpeg"
   },
   {
     "name": "オケアノス-海底探索STG-",
-    "version": "1.0",
-    "authors": [],
-    "tags": [
-      "#夏チーム_2023",
-      "#ストラテジー"
-    ],
-    "url": "",
-    "buildFile": "",
     "unityroomurl": "https://unityroom.com/games/teamg_aequor#google_vignette",
     "githuburl": "",
-    "description": "海底探索系シューティングゲーム！！\nオケアノス海域に起こった異変を調査すべく向かう主人公一行。\n迫りくる敵を倒し、最深部にたどりつけ！",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/53036/icon_20230930_212540.png?h=1696076740",
-    "markdown": ""
+    "description": "海底を探索するシューティングゲーム",
+    "image": "Images/Okeanos.png"
+  },
+  {
+    "name": "Space Parrabox",
+    "unityroomurl": "https://unityroom.com/games/parabox",
+    "githuburl": "",
+    "description": "宇宙を舞台にしたパズルシューティングゲーム",
+    "image": "https://images-ext-1.discordapp.net/external/bo9Dl70EbpU5lViVbLaknm7I6LKR-KXmOTy6bl_9Q7Q/%3Fh%3D1741886837/https/os-worker.unityroom.com/unityroom_production/icon/148512/icon_20250314_022717.png?format=webp&quality=lossless"
   },
   {
     "name": "モアイおとし",
-    "version": "1.0",
-    "authors": [
-      "藤"
-    ],
-    "tags": [
-      "#Unity1Week"
-    ],
-    "url": "",
-    "buildFile": "",
     "unityroomurl": "https://unityroom.com/games/moaiotoshi",
     "githuburl": "",
-    "description": "",
-    "image": "https://tadaup.jp/9NWciRm6.png",
-    "markdown": ""
-  },
-  {
-    "name": "モスキートサバイバー",
-    "version": "1.0",
-    "authors": [
-      "奥山"
-    ],
-    "tags": [
-      "#夏チーム_2024",
-      "#ローグライト"
-    ],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/mosquitosurvivor",
-    "githuburl": "",
-    "description": "ヴァンサバライクを作っていたと思ったら、\n制作中にプレイしていたRisk of Rain に影響を受けてしまった。",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/110175/icon_20241002_233259.png?h=1727879579",
-    "markdown": ""
-  },
-  {
-    "name": "リコシェシューティング",
-    "version": "1.0",
-    "authors": [],
-    "tags": [
-      "#冬チーム_2024",
-      "#シューティング"
-    ],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/ricochet_shooting",
-    "githuburl": "",
-    "description": "",
-    "image": "",
-    "markdown": ""
-  },
-  {
-    "name": "妖精の夏と冬",
-    "version": "1.0",
-    "authors": [],
-    "tags": [
-      "#2Dアクション"
-    ],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/cgphackb_yousei",
-    "githuburl": "",
-    "description": "妖精の力を借りて妹を助けよう！\nステージの季節を切り替えて進む２Dアクションゲーム",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/42746/icon_20230315_043446.PNG?h=1678822486",
-    "markdown": ""
-  },
-  {
-    "name": "競え！初夏の夢祭り",
-    "version": "1.0",
-    "authors": [],
-    "tags": [
-      "#夏チーム_2023"
-    ],
-    "url": "",
-    "buildFile": "",
-    "unityroomurl": "https://unityroom.com/games/midsummer-festa",
-    "githuburl": "",
-    "description": "夏祭りの喜びを感じながら、3つのミニゲームで競い合う「競え！初夏の夢祭り」。金魚すくい、射的、ポテトフライキャッチで高得点を目指し、夏の雰囲気を楽しもう！",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/55713/icon_20231003_202139.png?h=1696332099",
-    "markdown": ""
+    "description": "モアイ像を落とすアクションゲーム",
+    "image": "https://tadaup.jp/9NWciRm6.png"
   },
   {
     "name": "退勤エクスプロージョン",
-    "version": "1.2",
-    "authors": [],
-    "tags": [
-      "#アクション",
-      "#コメディ",
-      "#シミュレーション"
-    ],
-    "url": "",
-    "buildFile": "",
     "unityroomurl": "https://unityroom.com/games/taikinexplosion_team-2023_a",
     "githuburl": "",
-    "description": "社畜が会社を破壊するゲームです",
-    "image": "https://gck-prod-uploads.s3.ap-northeast-1.amazonaws.com/thumbnails/9a927084-fa13-4606-9997-2f0aa0148218.png",
-    "markdown": ""
+    "description": "社畜が会社を破壊するゲーム",
+    "image": "https://gck-prod-uploads.s3.ap-northeast-1.amazonaws.com/thumbnails/9a927084-fa13-4606-9997-2f0aa0148218.png"
+  },
+  {
+    "name": "リコシェシューティング",
+    "unityroomurl": "https://unityroom.com/games/ricochet_shooting",
+    "githuburl": "",
+    "description": "跳弾を活用するシューティングゲーム",
+    "image": ""
+  },
+  {
+    "name": "アモーレ！闘牛神",
+    "unityroomurl": "https://unityroom.com/games/amo_bull",
+    "githuburl": "",
+    "description": "闘牛をテーマにしたアクションゲーム",
+    "image": "https://i.ytimg.com/vi/RO31DiESUPY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAO_uShqqQl6ggXJDY6zaZWOJsRjg"
+  },
+  {
+    "name": "Runpage",
+    "unityroomurl": "https://unityroom.com/games/runpage24-d",
+    "githuburl": "",
+    "description": "ページを駆け抜けるシューティングゲーム",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/116130/icon_20241103_102439.jpg?h=1730597079"
   }
 ]
