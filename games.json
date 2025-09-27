@@ -1,13 +1,31 @@
 [
   {
     "name": "Space Sound",
-    "unityroomurl": "",
+    "authors": [
+      "Sound Team",
+      "音楽制作チーム"
+    ],
+    "tags": [
+      "#音ゲー",
+      "#リズム",
+      "#音楽"
+    ],
+    "unityroomurl": "https://github.com/twogod23/team_c_cgp_gamejam_2023",
     "githuburl": "https://github.com/twogod23/team_c_cgp_gamejam_2023",
     "description": "シンプルな音ゲー",
     "image": "https://raw.githubusercontent.com/twogod23/team_c_cgp_gamejam_2023/main/Assets/Futagami/Images/title_logo.png"
   },
   {
     "name": "Pocket Gardening",
+    "authors": [
+      "Garden Studios",
+      "植物愛好会"
+    ],
+    "tags": [
+      "#シミュレーション",
+      "#癒し",
+      "#ガーデニング"
+    ],
     "unityroomurl": "",
     "githuburl": "https://github.com/Rofutok112/PocketGardening",
     "description": "植物を育てるシミュレーションゲーム",
@@ -15,6 +33,13 @@
   },
   {
     "name": "オケアノス-海底探索STG-",
+    "authors": [
+      "Team G"
+    ],
+    "tags": [
+      "#シューティング",
+      "#探索"
+    ],
     "unityroomurl": "https://unityroom.com/games/teamg_aequor#google_vignette",
     "githuburl": "",
     "description": "海底を探索するシューティングゲーム",
@@ -22,6 +47,16 @@
   },
   {
     "name": "Space Parrabox",
+    "authors": [
+      "三谷",
+      "橋詰",
+      "森田"
+    ],
+    "tags": [
+      "#冬チーム_2024",
+      "シューティング",
+      "パズル"
+    ],
     "unityroomurl": "https://unityroom.com/games/parabox",
     "githuburl": "",
     "description": "宇宙を舞台にしたパズルシューティングゲーム",
@@ -29,6 +64,12 @@
   },
   {
     "name": "モアイおとし",
+    "authors": [
+      "藤"
+    ],
+    "tags": [
+      "#Unity1Week"
+    ],
     "unityroomurl": "https://unityroom.com/games/moaiotoshi",
     "githuburl": "",
     "description": "モアイ像を落とすアクションゲーム",
@@ -36,6 +77,15 @@
   },
   {
     "name": "退勤エクスプロージョン",
+    "authors": [
+      "CGP Studios",
+      "田中太郎"
+    ],
+    "tags": [
+      "#アクション",
+      "#コメディ",
+      "#シミュレーション"
+    ],
     "unityroomurl": "https://unityroom.com/games/taikinexplosion_team-2023_a",
     "githuburl": "",
     "description": "社畜が会社を破壊するゲーム",
@@ -43,6 +93,13 @@
   },
   {
     "name": "リコシェシューティング",
+    "authors": [
+      "冬チーム"
+    ],
+    "tags": [
+      "#冬チーム_2024",
+      "#シューティング"
+    ],
     "unityroomurl": "https://unityroom.com/games/ricochet_shooting",
     "githuburl": "",
     "description": "跳弾を活用するシューティングゲーム",
@@ -50,16 +107,15 @@
   },
   {
     "name": "アモーレ！闘牛神",
+    "authors": [
+      "冬チーム"
+    ],
+    "tags": [
+      "#冬チーム_2024"
+    ],
     "unityroomurl": "https://unityroom.com/games/amo_bull",
     "githuburl": "",
     "description": "闘牛をテーマにしたアクションゲーム",
     "image": "https://i.ytimg.com/vi/RO31DiESUPY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAO_uShqqQl6ggXJDY6zaZWOJsRjg"
-  },
-  {
-    "name": "Runpage",
-    "unityroomurl": "https://unityroom.com/games/runpage24-d",
-    "githuburl": "",
-    "description": "ページを駆け抜けるシューティングゲーム",
-    "image": "https://os-worker.unityroom.com/unityroom_production/icon/116130/icon_20241103_102439.jpg?h=1730597079"
   }
 ]
