@@ -103,6 +103,18 @@
     "markdown": ""
   },
   {
+    "name": "たつまきゲーム",
+    "version": "",
+    "authors": [
+      "吉岡晴輝"
+    ],
+    "tags": [],
+    "unityroomurl": "",
+    "githuburl": "https://github.com/Hal-0823/CGP_2025_9_Hack_Tatsumaki",
+    "description": "たつまきを操作し、たくさんオブジェクトを吸い込もう。",
+    "image": ""
+  },
+  {
     "name": "ときめき☆ネイルーム",
     "version": "1.0",
     "authors": [],
@@ -147,6 +159,18 @@
     "description": "海底探索系シューティングゲーム！！\nオケアノス海域に起こった異変を調査すべく向かう主人公一行。\n迫りくる敵を倒し、最深部にたどりつけ！",
     "image": "https://os-worker.unityroom.com/unityroom_production/icon/53036/icon_20230930_212540.png?h=1696076740",
     "markdown": ""
+  },
+  {
+    "name": "カタツムリは空を見たい",
+    "version": "",
+    "authors": [
+      "山下惺也"
+    ],
+    "tags": [],
+    "unityroomurl": "",
+    "githuburl": "https://github.com/yamashita-cgp/tatu",
+    "description": "WASD操作　パズルゲーム",
+    "image": ""
   },
   {
     "name": "モアイおとし",
@@ -200,6 +224,18 @@
     "markdown": ""
   },
   {
+    "name": "光達 (コウタツ)",
+    "version": "",
+    "authors": [
+      "奥山"
+    ],
+    "tags": [],
+    "unityroomurl": "",
+    "githuburl": "https://github.com/Hiraisun/CGPhaku_202509_tatsu",
+    "description": "宇宙空間に鏡を配置し、宇宙船から基地局への通信を確立する(光線を到達させる)ゲームです。",
+    "image": ""
+  },
+  {
     "name": "妖精の夏と冬",
     "version": "1.0",
     "authors": [],
@@ -245,5 +281,17 @@
     "description": "社畜が会社を破壊するゲームです",
     "image": "https://gck-prod-uploads.s3.ap-northeast-1.amazonaws.com/thumbnails/9a927084-fa13-4606-9997-2f0aa0148218.png",
     "markdown": ""
+  },
+  {
+    "name": "連続たつゲーム",
+    "version": "",
+    "authors": [],
+    "tags": [
+      "山田百華"
+    ],
+    "unityroomurl": "",
+    "githuburl": "https://github.com/NemoP1/Tatsu2",
+    "description": "「たつ」に関するミニゲームを連続でクリアしていくゲームです。",
+    "image": ""
   }
 ]
