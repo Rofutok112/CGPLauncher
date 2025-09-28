@@ -13,7 +13,7 @@ class GamesEditor:
     def __init__(self, root):
         self.root = root
         self.root.title("Games.json エディター")
-        self.root.geometry("600x850")
+        self.root.geometry("600x750")
         self.root.resizable(False, False)  # 画面サイズ固定
         
         # JSONファイルのパス
@@ -239,12 +239,6 @@ class GamesEditor:
             ("tags", "タグ（カンマ区切り）"),
         ]
         
-        # ダウンロード関連フィールド（セット）
-        download_fields = [
-            ("url", "ダウンロードURL"),
-            ("buildFile", "実行ファイル名"),
-        ]
-        
         # その他のURL
         url_fields = [
             ("unityroomurl", "unityroomURL"),
@@ -255,7 +249,6 @@ class GamesEditor:
         other_fields = [
             ("description", "説明"),
             ("image", "画像URL"),
-            ("markdown", "MarkdownファイルURL")
         ]
         
         self.entry_vars = {}
@@ -276,20 +269,8 @@ class GamesEditor:
         # ダウンロード情報セクション（セット）
         ttk.Separator(parent, orient='horizontal').grid(row=row, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
         row += 1
-        ttk.Label(parent, text="ダウンロード情報", font=('', 10, 'bold')).grid(row=row, column=0, columnspan=2, sticky=tk.W, pady=(0, 5))
-        row += 1
         
-        for field, label in download_fields:
-            ttk.Label(parent, text=label + ":").grid(row=row, column=0, sticky=tk.W, padx=(0, 5), pady=2)
-            var = tk.StringVar()
-            entry = ttk.Entry(parent, textvariable=var, width=50)
-            entry.grid(row=row, column=1, sticky=(tk.W, tk.E), pady=2)
-            self.entry_vars[field] = var
-            row += 1
-            
         # URL情報セクション
-        ttk.Separator(parent, orient='horizontal').grid(row=row, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
-        row += 1
         ttk.Label(parent, text="URL情報", font=('', 10, 'bold')).grid(row=row, column=0, columnspan=2, sticky=tk.W, pady=(0, 5))
         row += 1
         
@@ -345,13 +326,21 @@ class GamesEditor:
             else:
                 self.games_data = []
                 
-            self.filtered_games = self.games_data.copy()  # 初期状態では全ゲームを表示
-            self.refresh_game_list()
+            # アルファベット順を維持
+            self.maintain_alphabetical_order()
+            
             self.clear_edit_fields()
             self.show_status("ゲームデータを読み込みました", "success")
             
         except Exception as e:
             self.show_status(f"ファイルの読み込みに失敗しました: {str(e)}", "error", auto_clear=False)
+            
+    def maintain_alphabetical_order(self):
+        """ゲームデータをアルファベット順に維持する"""
+        if self.games_data:
+            self.games_data.sort(key=lambda game: game.get("name", "").lower())
+            self.filtered_games = self.games_data.copy()
+            self.refresh_game_list()
             
     def refresh_game_list(self):
         """ゲームリストを更新"""
@@ -437,24 +426,12 @@ class GamesEditor:
             self.show_status("ゲーム名を入力してください", "warning", auto_clear=False)
             return False
             
-        # URL必須チェック（GitHubURL、UnityRoomURL、ダウンロードURLのいずれか1つ以上）
-        url_fields = ["url", "unityroomurl", "githuburl"]
+        # URL必須チェック（GitHubURL、UnityRoomURLのいずれか1つ以上）
+        url_fields = ["unityroomurl", "githuburl"]
         has_url = any(game_data.get(field, "").strip() for field in url_fields)
         
         if not has_url:
-            self.show_status("GitHubURL、UnityRoomURL、ダウンロードURLのいずれか1つ以上を入力してください", "warning", auto_clear=False)
-            return False
-            
-        # ダウンロードURLと実行ファイル名のセットチェック
-        download_url = game_data.get("url", "").strip()
-        build_file = game_data.get("buildFile", "").strip()
-        
-        if download_url and not build_file:
-            self.show_status("ダウンロードURLを入力した場合は、実行ファイル名も入力してください", "warning", auto_clear=False)
-            return False
-            
-        if build_file and not download_url:
-            self.show_status("実行ファイル名を入力した場合は、ダウンロードURLも入力してください", "warning", auto_clear=False)
+            self.show_status("GitHubURLまたはUnityRoomURLのいずれか1つ以上を入力してください", "warning", auto_clear=False)
             return False
             
         return True
@@ -523,6 +500,9 @@ class GamesEditor:
                     self.show_status(f"URL検証完了: {success_count}/{total_count} 個のURLが有効", "success")
             
         self.games_data.append(game_data)
+        
+        # アルファベット順を維持
+        self.maintain_alphabetical_order()
         
         # 検索をクリアして全ゲームを表示
         self.search_var.set("")
@@ -620,13 +600,25 @@ class GamesEditor:
             
         # 保存されたインデックスを使用してゲームデータを更新
         if self.selected_game_index < len(self.games_data):
+            old_name = self.games_data[self.selected_game_index].get("name", "")
+            new_name = game_data.get("name", "")
+            
             self.games_data[self.selected_game_index] = game_data
             
             # 選択されたゲーム情報も更新
             self.selected_game = game_data
             
-            # フィルターリストも更新
-            self.on_search_change()
+            # 名前が変更された場合はアルファベット順を維持
+            if old_name != new_name:
+                self.maintain_alphabetical_order()
+                # 新しい位置のインデックスを取得
+                for i, game in enumerate(self.games_data):
+                    if game == game_data:
+                        self.selected_game_index = i
+                        break
+            else:
+                # フィルターリストも更新
+                self.on_search_change()
             
             # 更新したゲームを再選択（可能であれば）
             try:
@@ -709,11 +701,9 @@ class GamesEditor:
     def _check_urls_sync(self, game_data):
         """URL検証の同期版（保存時用）"""
         url_fields = {
-            "url": "ダウンロードURL",
             "unityroomurl": "unityroomURL", 
             "githuburl": "GitHubURL",
-            "image": "画像URL",
-            "markdown": "MarkdownURL"
+            "image": "画像URL"
         }
         
         results = []
