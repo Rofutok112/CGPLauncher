@@ -234,7 +234,6 @@ class GamesEditor:
         # 基本情報フィールド
         basic_fields = [
             ("name", "ゲーム名"),
-            ("version", "バージョン"),
             ("authors", "作者（カンマ区切り）"),
             ("tags", "タグ（カンマ区切り）"),
         ]
