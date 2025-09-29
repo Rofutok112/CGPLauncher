@@ -70,6 +70,22 @@
     "image": "https://os-worker.unityroom.com/unityroom_production/icon/53743/icon_20230917_032245.png?h=1694888565"
   },
   {
+    "name": "おれの夏休み",
+    "authors": [
+      "岡地",
+      "田中",
+      "牧",
+      "横谷"
+    ],
+    "tags": [
+      "夏チーム_2025"
+    ],
+    "unityroomurl": "https://unityroom.com/games/ore-no-summervacation",
+    "githuburl": "",
+    "description": "",
+    "image": ""
+  },
+  {
     "name": "くるくるナイン",
     "authors": [],
     "tags": [],
@@ -83,7 +99,10 @@
     "authors": [
       "吉岡晴輝"
     ],
-    "tags": ["たつ", "月ハク_2025_9"],
+    "tags": [
+      "たつ",
+      "月ハク_2025_9"
+    ],
     "unityroomurl": "",
     "githuburl": "https://github.com/Hal-0823/CGP_2025_9_Hack_Tatsumaki",
     "description": "たつまきを操作し、たくさんオブジェクトを吸い込もう。",
@@ -128,7 +147,10 @@
     "authors": [
       "山下惺也"
     ],
-    "tags": ["たつ", "月ハク_2025_9"],
+    "tags": [
+      "たつ",
+      "月ハク_2025_9"
+    ],
     "unityroomurl": "",
     "githuburl": "https://github.com/yamashita-cgp/tatu",
     "description": "WASD操作　パズルゲーム",
@@ -178,7 +200,10 @@
     "authors": [
       "奥山"
     ],
-    "tags": ["たつ", "月ハク_2025_9"],
+    "tags": [
+      "たつ",
+      "月ハク_2025_9"
+    ],
     "unityroomurl": "",
     "githuburl": "https://github.com/Hiraisun/CGPhaku_202509_tatsu",
     "description": "宇宙空間に鏡を配置し、宇宙船から基地局への通信を確立する(光線を到達させる)ゲームです。",
@@ -221,15 +246,16 @@
   },
   {
     "name": "連続たつゲーム",
-    "authors": ["山田百華"],
+    "authors": [
+      "山田百華"
+    ],
     "tags": [
-      "たつ", "月ハク_2025_9"
+      "たつ",
+      "月ハク_2025_9"
     ],
     "unityroomurl": "",
     "githuburl": "https://github.com/NemoP1/Tatsu2",
     "description": "「たつ」に関するミニゲームを連続でクリアしていくゲームです。",
     "image": ""
   }
-
 ]
-
