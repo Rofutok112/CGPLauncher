@@ -83,7 +83,7 @@
     "authors": [
       "吉岡晴輝"
     ],
-    "tags": [],
+    "tags": ["たつ", "月ハク_2025_9"],
     "unityroomurl": "",
     "githuburl": "https://github.com/Hal-0823/CGP_2025_9_Hack_Tatsumaki",
     "description": "たつまきを操作し、たくさんオブジェクトを吸い込もう。",
@@ -128,7 +128,7 @@
     "authors": [
       "山下惺也"
     ],
-    "tags": [],
+    "tags": ["たつ", "月ハク_2025_9"],
     "unityroomurl": "",
     "githuburl": "https://github.com/yamashita-cgp/tatu",
     "description": "WASD操作　パズルゲーム",
@@ -178,7 +178,7 @@
     "authors": [
       "奥山"
     ],
-    "tags": [],
+    "tags": ["たつ", "月ハク_2025_9"],
     "unityroomurl": "",
     "githuburl": "https://github.com/Hiraisun/CGPhaku_202509_tatsu",
     "description": "宇宙空間に鏡を配置し、宇宙船から基地局への通信を確立する(光線を到達させる)ゲームです。",
@@ -221,13 +221,14 @@
   },
   {
     "name": "連続たつゲーム",
-    "authors": [],
+    "authors": [山田百華],
     "tags": [
-      "山田百華"
+      "たつ", "月ハク_2025_9"
     ],
     "unityroomurl": "",
     "githuburl": "https://github.com/NemoP1/Tatsu2",
     "description": "「たつ」に関するミニゲームを連続でクリアしていくゲームです。",
     "image": ""
   }
+
 ]
