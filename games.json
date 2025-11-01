@@ -1,21 +1,5 @@
 [
   {
-    "name": "Pocket Gardening",
-    "authors": [
-      "橋詰",
-      "田尻",
-      "吉岡"
-    ],
-    "tags": [
-      "#ガーデニング",
-      "#パズル"
-    ],
-    "unityroomurl": "",
-    "githuburl": "https://github.com/Rofutok112/PocketGardening",
-    "description": "パズル✕ガーデニングゲーム",
-    "image": "https://raw.githubusercontent.com/Rofutok112/PocketGardening/main/wallpaper.png"
-  },
-  {
     "name": "Runpage",
     "authors": [
       "藤"
@@ -258,4 +242,5 @@
     "description": "「たつ」に関するミニゲームを連続でクリアしていくゲームです。",
     "image": ""
   }
+
 ]
