@@ -14,6 +14,20 @@
     "image": "https://os-worker.unityroom.com/unityroom_production/icon/116130/icon_20241103_102439.jpg?h=1730597079"
   },
   {
+    "name": "Wire Witch",
+    "authors": [
+      "貝原"
+    ],
+    "tags": [
+      "#夏チーム_2025",
+      "#シューティング"
+    ],
+    "unityroomurl": "",
+    "githuburl": "https://github.com/Kager0u222/CGP_2025_SummerTeam_B",
+    "description": "シンプルな横スクロールシューティングゲームです。",
+    "image": "https://os-worker.unityroom.com/unityroom_production/icon/116130/icon_20241103_102439.jpg?h=1730597079"
+  },
+  {
     "name": "Space Parrabox",
     "authors": [
       "三谷",
@@ -230,4 +244,5 @@
   }
 
 ]
+
 
